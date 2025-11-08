@@ -17,6 +17,9 @@ bgImg.src = "assets/bg.jpg"; // add any fun background image
 // 🔊 Sounds
 const sfxCollect = new Audio("assets/audio.mp3");
 const sfxHit = new Audio("assets/sry.mp3");
+const bgMusic = new Audio("assets/modi song org.mp3"); // background song
+bgMusic.loop = true; // keep looping during play
+bgMusic.volume = 0.5; // adjust volume if needed
 
 // 🧍 Player setup
 const player = {
@@ -148,10 +151,13 @@ function update() {
     v.y += v.speed;
 
     if (!player.invincible && rectCollision(player, v)) {
-      sfxHit.play();
-      gameOver = true;
-      restartButton.visible = true;
-    }
+  sfxHit.play();
+  gameOver = true;
+  restartButton.visible = true;
+  bgMusic.pause();   // 🔇 Stop background song
+  bgMusic.currentTime = 0; // rewind for next restart
+}
+
 
     if (v.y > canvas.height) {
       villains.splice(i, 1);
@@ -270,7 +276,9 @@ function restartGame() {
   score = 0;
   restartButton.visible = false;
   player.invincible = false;
+  bgMusic.play(); // 🎵 Start song again
+
   update();
 }
-
+bgMusic.play();
 update();
