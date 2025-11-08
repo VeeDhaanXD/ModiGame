@@ -52,6 +52,36 @@ canvas.addEventListener("mousemove", (e) => {
   player.x = e.clientX - rect.left - player.width / 2;
 });
 
+
+// 🎯 Mouse control (for PC)
+canvas.addEventListener("mousemove", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  player.x = e.clientX - rect.left - player.width / 2;
+});
+
+// 📱 Mobile button controls
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+
+let movingLeft = false;
+let movingRight = false;
+
+leftBtn.addEventListener("touchstart", () => (movingLeft = true));
+leftBtn.addEventListener("touchend", () => (movingLeft = false));
+rightBtn.addEventListener("touchstart", () => (movingRight = true));
+rightBtn.addEventListener("touchend", () => (movingRight = false));
+
+function handleMobileMovement() {
+  const moveSpeed = 5; // adjust for sensitivity
+  if (movingLeft && player.x > 0) player.x -= moveSpeed;
+  if (movingRight && player.x + player.width < canvas.width) player.x += moveSpeed;
+}
+
+
+
+
+
+
 // 💥 Create villains
 function createVillain() {
   const size = 50;
@@ -99,6 +129,8 @@ function activateInvincibility() {
 
 function update() {
   if (gameOver) return;
+  handleMobileMovement(); // moves player using mobile buttons
+
 
   // Background scroll
   bgY1 += bgSpeed;

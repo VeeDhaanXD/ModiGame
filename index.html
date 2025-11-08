@@ -4,21 +4,56 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vertical Runner</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: #111;
+  
+ <style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 30px;
+  }
+
+  button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    font-size: 32px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+  }
+
+  button:active {
+    background-color: rgba(0, 255, 255, 0.4);
+  }
+
+  @media (min-width: 768px) {
+    #controls {
+      display: none; /* hide on desktop */
     }
-    canvas {
-      display: block;
-      margin: 0 auto;
-      background: linear-gradient(to bottom, #1a1a1a, #333);
-    }
-  </style>
+  }
+</style>
+
 </head>
 <body>
-  <canvas id="gameCanvas" width="400" height="600"></canvas>
+ <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+<!-- Mobile Buttons -->
+<div id="controls">
+  <button id="leftBtn">⬅️</button>
+  <button id="rightBtn">➡️</button>
+</div>
   <script src="script.js"></script>
 </body>
 </html>
